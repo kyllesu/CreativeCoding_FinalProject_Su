@@ -11,6 +11,36 @@
 
 */
 
+
+Tree[] cherryTree;
+
+void setup() {
+  size(1200, 900);
+  background(5,50);
+  ellipseMode(CENTER);
+  stroke(255, 200);
+  smooth();
+
+  cherryTree = new Tree[1];
+  cherryTree[0] = new Tree();
+  
+}
+
+void draw() {
+
+  for (int j = 0; j < 1; j++) { 
+    for (int i = 0; i < cherryTree.length; i++) {
+      PVector pos = cherryTree[i].position;
+      PVector prevPos = cherryTree[i].prevPosition;
+      strokeWeight(cherryTree[i].diameter);
+      line(prevPos.x,prevPos.y,pos.x,pos.y);
+      cherryTree[i].update();
+    }
+  }
+  
+}
+
+
 class Tree {
   PVector prevPosition;
   PVector position;
@@ -70,34 +100,8 @@ class Tree {
   
 }
 
-Tree[] cherryTree;
 
-void setup() {
-  size(1000, 900);
-  background(5,50);
-  ellipseMode(CENTER);
-  stroke(255, 200);
-  smooth();
-
-  cherryTree = new Tree[1];
-  cherryTree[0] = new Tree();
-  
-}
-
-void draw() {
-
-  for (int j = 0; j < 1; j++) { 
-    for (int i = 0; i < cherryTree.length; i++) {
-      PVector pos = cherryTree[i].position;
-      PVector prevPos = cherryTree[i].prevPosition;
-      strokeWeight(cherryTree[i].diameter);
-      line(prevPos.x,prevPos.y,pos.x,pos.y);
-      cherryTree[i].update();
-    }
-  }
-  
-}
-
+//temp reset button for testing tree visuals
 void mousePressed() {
   background(5,50);
   cherryTree = new Tree[1];
