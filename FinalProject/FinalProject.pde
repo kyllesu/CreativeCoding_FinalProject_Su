@@ -2,10 +2,10 @@
   Final Project
   ~5 Centimeters per Second
   References thus far:
+  https://www.openprocessing.org/sketch/144159 by Asher Salomon
   https://www.youtube.com/watch?v=fcdNSZ9IzJM
   https://www.youtube.com/watch?v=E1B4UoSQMFw&list=PLRqwX-V7Uu6bxNsa_3SfCPyF9Md9XvXhR&index=3
   https://www.youtube.com/watch?v=RWAcbV4X7C8
-  https://www.openprocessing.org/sketch/144159
   https://www.youtube.com/watch?v=KkyIDI6rQJI&t=1s
   https://www.youtube.com/watch?v=vdgiqMkFygc&list=PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy
   https://www.youtube.com/watch?v=krRpZFU6rSI&list=PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy&index=4
@@ -16,6 +16,7 @@ made change
 
 Tree[] cherryTree;
 int timestamp1 = 0;
+int interval = 6500;
 
 void setup() {
   size(1200, 900);
@@ -30,19 +31,29 @@ void setup() {
 }
 
 void draw() {
+  growTree();
+  
+  //if (millis() - timestamp1 > interval) {
+  //  physics();//this will be wind function   
+  //}
+  
+  println(timestamp1);
+  
+}
 
-  for (int j = 0; j < .8; j++) { 
+void growTree() {
+  for (int j = 0; j < .8; j++) { //loop for speed of tree growth
     for (int i = 0; i < cherryTree.length; i++) {
       PVector pos = cherryTree[i].position;
       PVector prevPos = cherryTree[i].prevPosition;
-      strokeWeight(cherryTree[i].diameter);
-      line(prevPos.x,prevPos.y,pos.x,pos.y);
+      strokeWeight(cherryTree[i].diameter); //size of line will be diameter calculated in class function
+      line(prevPos.x,prevPos.y,pos.x,pos.y); //line coordinates will be positions drawn from vectors
       cherryTree[i].update();
 
 
     }
   }
-  println(timestamp1);
+  timestamp1 = millis(); //timestamp
   
 }
 
@@ -53,6 +64,7 @@ class Tree {
   PVector velocity;
   float diameter;
   boolean blossom;
+  boolean fullyGrown;
   int windSpd = 3;
   int grav, wind = 0;
   float gravSpd = random(-3,3);
@@ -60,9 +72,10 @@ class Tree {
   Tree() {
     position = new PVector(width/2, height); //middle bottom of screen
     prevPosition = new PVector(position.x, position.y);
-    velocity = new PVector(0, -10); 
+    velocity = new PVector(0, -1); 
     diameter = 50; //original trunk size
     blossom = false; //do not grow flower
+    fullyGrown = false;
 
   }
   
@@ -72,13 +85,14 @@ class Tree {
     velocity = parent.velocity.copy();  //get the velocity entry of previous branch.
     diameter = parent.diameter * 0.67; //scale of branches and final size of tree
     blossom = parent.blossom;
+    fullyGrown = parent.fullyGrown;
     parent.diameter = diameter;
   }
 
   void update() { //growing the tree out
   
-    if(position.x > -10 & position.x < width + 10 & position.y > - 10 & position.y < height + 10) {
-      prevPosition.set(position.x, position.y);
+    if(position.x > -10 & position.x < width + 10 & position.y > - 10 & position.y < height + 10) { //set boundaries for tree
+      prevPosition.set(position.x, position.y); 
       if (diameter > 0.13) { //if the tree reaches this diameter, stop growing
         PVector growth = new PVector(random(-1, 1), random(-1, 1));  // random growth direction
         velocity.normalize(); //reset units 
@@ -95,10 +109,14 @@ class Tree {
         if(!blossom) { //generate flower
           blossom = true;
           noStroke();
-          fill(255,153,204,100);
+          fill(255,153,204,100); //pinK!
           ellipse(position.x,position.y,10,10); //flower
           stroke(250,200);
-          timestamp1 = millis();
+        }
+        if(!fullyGrown && millis() > 9000) {
+          fullyGrown = true;
+          //apply phyics?? 
+          
         }
       } 
     }
