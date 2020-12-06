@@ -15,8 +15,11 @@ made change
 
 
 Tree[] cherryTree;
+PetalSystem ps;
+
 int timestamp1 = 0;
-int interval = 6500;
+int interval = 6500; //change to variable long 
+//long interval = 6500;
 
 void setup() {
   size(1200, 900);
@@ -27,6 +30,7 @@ void setup() {
 
   cherryTree = new Tree[1];
   cherryTree[0] = new Tree();
+  ps = new PetalSystem(new PVector(random(width), -15));
   
 }
 
@@ -38,6 +42,15 @@ void draw() {
   //}
   
   println(timestamp1);
+  
+  if (millis() > 12000) {
+    background(5,50);
+    noStroke();
+    fill(100,150,255,100);
+    rect(0,height - 80, width,80);    
+    ps.addPetals(); 
+    ps.run();   
+  }
   
 }
 
@@ -53,7 +66,8 @@ void growTree() {
 
     }
   }
-  timestamp1 = millis(); //timestamp
+  //day = "wednesday";
+  //timestamp1 = millis(); //timestamp
   
 }
 
@@ -64,10 +78,6 @@ class Tree {
   PVector velocity;
   float diameter;
   boolean blossom;
-  boolean fullyGrown;
-  int windSpd = 3;
-  int grav, wind = 0;
-  float gravSpd = random(-3,3);
   
   Tree() {
     position = new PVector(width/2, height); //middle bottom of screen
@@ -75,7 +85,7 @@ class Tree {
     velocity = new PVector(0, -1); 
     diameter = 50; //original trunk size
     blossom = false; //do not grow flower
-    fullyGrown = false;
+ 
 
   }
   
@@ -85,7 +95,6 @@ class Tree {
     velocity = parent.velocity.copy();  //get the velocity entry of previous branch.
     diameter = parent.diameter * 0.67; //scale of branches and final size of tree
     blossom = parent.blossom;
-    fullyGrown = parent.fullyGrown;
     parent.diameter = diameter;
   }
 
@@ -109,35 +118,22 @@ class Tree {
         if(!blossom) { //generate flower
           blossom = true;
           noStroke();
-          fill(255,153,204,100); //pinK!
+          //fill(255,153,204,100); //pinK!
+          fill(255, random(150,160),random(200,210),100);
           ellipse(position.x,position.y,10,10); //flower
           stroke(250,200);
-        }
-        if(!fullyGrown && millis() > 9000) {
-          fullyGrown = true;
-          //apply phyics?? 
-          
         }
       } 
     }
     
-    //if (millis() > 11000) {
-    //  noStroke();
-    //  fill(255,153,204,100);
-    //  ellipse(position.x + wind, position.y + grav, 10,10);
-    //  stroke(250,200);
-    //  wind += windSpd;
-    //  grav += gravSpd;
-    //}
-
   }
   
 }
 
 
 //temp reset button for testing tree visuals
-void mousePressed() {
-  background(5,50);
-  cherryTree = new Tree[1];
-  cherryTree[0] = new Tree();
-}
+//void mousePressed() {
+//  background(5,50);
+//  cherryTree = new Tree[1];
+//  cherryTree[0] = new Tree();
+//}
