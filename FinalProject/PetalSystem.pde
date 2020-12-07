@@ -1,6 +1,6 @@
 
 class PetalSystem {
-  ArrayList<Petals> petalsystem;
+  ArrayList<Petals> petalsystem; //create an array/system of the petals
   PVector start;
   
   PetalSystem(PVector location) {
@@ -9,7 +9,7 @@ class PetalSystem {
   }
   
   void addPetals() {
-    petalsystem.add(new Petals(new PVector(random(width), -5)));
+    petalsystem.add(new Petals(new PVector(random(width), -5))); //start offscreen at varying pos on x-axis
 
 
   }

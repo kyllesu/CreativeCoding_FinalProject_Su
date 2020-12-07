@@ -9,17 +9,17 @@
   https://www.youtube.com/watch?v=KkyIDI6rQJI&t=1s
   https://www.youtube.com/watch?v=vdgiqMkFygc&list=PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy
   https://www.youtube.com/watch?v=krRpZFU6rSI&list=PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy&index=4
+  https://www.youtube.com/watch?v=jrTMMG0zJyI - music
+  http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
 
-made change
 */
 
+import ddf.minim.*;
+Minim minim;
+AudioPlayer music;
 
 Tree[] cherryTree;
 PetalSystem ps;
-
-int timestamp1 = 0;
-int interval = 6500; //change to variable long 
-//long interval = 6500;
 
 void setup() {
   size(1200, 900);
@@ -27,6 +27,10 @@ void setup() {
   ellipseMode(CENTER);
   stroke(255, 200);
   smooth();
+  
+  minim = new Minim(this);
+  music = minim.loadFile("lofi.mp3");
+  music.play(13000); //plays music from this timeframe 
 
   cherryTree = new Tree[1];
   cherryTree[0] = new Tree();
@@ -37,16 +41,10 @@ void setup() {
 void draw() {
   growTree();
   
-  //if (millis() - timestamp1 > interval) {
-  //  physics();//this will be wind function   
-  //}
-  
-  println(timestamp1);
-  
-  if (millis() > 12000) {
+  if (millis() > 15500) {
     background(5,50);
     noStroke();
-    fill(100,150,255,100);
+    fill(100,150,255,150);
     rect(0,height - 80, width,80);    
     ps.addPetals(); 
     ps.run();   
@@ -66,8 +64,6 @@ void growTree() {
 
     }
   }
-  //day = "wednesday";
-  //timestamp1 = millis(); //timestamp
   
 }
 
@@ -119,7 +115,7 @@ class Tree {
           blossom = true;
           noStroke();
           //fill(255,153,204,100); //pinK!
-          fill(255, random(150,160),random(200,210),100);
+          fill(random(245,255), random(150,160),random(200,210),100);
           ellipse(position.x,position.y,10,10); //flower
           stroke(250,200);
         }

@@ -13,8 +13,8 @@ class Petals {
     grav = random(0.5, 1); //gravity effect to determined weight of petal 
     diameter = grav * 8; //varying petal sizes 
     
-    acceleration = new PVector (0, 0.002 * grav);
-    velocity = new PVector(random(-1.4,1.4), random(-1.2,0));
+    acceleration = new PVector (0, 0.002 * grav); 
+    velocity = new PVector(random(-1.4,1.4), random(-1.2,0)); //speed at which petals fall
     location = loc.copy();
      
   }
@@ -22,19 +22,19 @@ class Petals {
   void update() {
     velocity.add(acceleration);
     location.add(velocity);
-    lifespan -= 1.;
+    lifespan -= 1.; //lifespan continously diminishes
   
   }
   
   void display() {
     noStroke();
-    fill(255, random(150,160),random(200,210),lifespan);
+    fill(random(245,255), random(150,160),random(200,210),lifespan);
     ellipse(location.x, location.y, diameter, diameter);
     if (location.y >= height - 80) {
       noStroke();
       //fill(255,153,204,100);
       fill(255, random(150,160),random(200,210),lifespan);
-      ellipse(location.x, height - 60, 7,7);
+      ellipse(location.x, height - 57, 7,7);
     
     } 
     
