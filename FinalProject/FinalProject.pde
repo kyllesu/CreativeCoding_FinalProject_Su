@@ -12,7 +12,8 @@
   https://www.youtube.com/watch?v=jrTMMG0zJyI - music
   http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
 
-Things to do: add forces NOC ch. 2
+Things to do: add forces NOC ch. 2?
+scenematic view for second screen
 */
 
 import ddf.minim.*;
@@ -43,12 +44,13 @@ void draw() {
   growTree();
   
   if (millis() > 15500) {
-    background(5,50);
-    noStroke();
-    fill(100,150,255,150);
-    rect(0,height - 80, width,80);    
+    background(5,50);   
     ps.addPetals(); 
     ps.run();   
+    noStroke();
+    fill(80,170,255,120);
+    rect(0,height - 80, width,80); //pond
+
   }
   
 }

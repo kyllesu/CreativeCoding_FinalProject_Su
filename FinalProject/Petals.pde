@@ -7,6 +7,7 @@ class Petals {
   float lifespan;
   float grav;
   float diameter;
+
   
   Petals(PVector loc) {
     lifespan = 1500; //lifespan of petal will slowly fade away based on opacity
@@ -30,11 +31,13 @@ class Petals {
     noStroke();
     fill(random(245,255), random(150,160),random(200,210),lifespan);
     ellipse(location.x, location.y, diameter, diameter);
+
     if (location.y >= height - 80) {
       noStroke();
       //fill(255,153,204,100);
-      fill(255, random(150,160),random(200,210),lifespan);
-      ellipse(location.x, height - 57, 7,7);
+      fill(random(245,255), random(150,160),random(200,210),lifespan);
+      ellipse(location.x, height - 65, 7,7);
+      location.y = height - 65;
     
     } 
     
