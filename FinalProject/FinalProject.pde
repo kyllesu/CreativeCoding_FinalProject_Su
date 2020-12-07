@@ -12,8 +12,7 @@
   https://www.youtube.com/watch?v=jrTMMG0zJyI - music
   http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
 
-Things to do: add forces NOC ch. 2?
-scenematic view for second screen
+
 */
 
 import ddf.minim.*;
