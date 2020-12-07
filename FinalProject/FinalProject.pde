@@ -12,6 +12,7 @@
   https://www.youtube.com/watch?v=jrTMMG0zJyI - music
   http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
 
+Things to do: add forces NOC ch. 2
 */
 
 import ddf.minim.*;
@@ -60,7 +61,6 @@ void growTree() {
       strokeWeight(cherryTree[i].diameter); //size of line will be diameter calculated in class function
       line(prevPos.x,prevPos.y,pos.x,pos.y); //line coordinates will be positions drawn from vectors
       cherryTree[i].update();
-
 
     }
   }
