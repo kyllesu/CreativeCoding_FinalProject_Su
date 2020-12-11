@@ -11,16 +11,20 @@
   https://www.youtube.com/watch?v=krRpZFU6rSI&list=PLRqwX-V7Uu6Z9hI4mSgx2FlE5w8zvjmEy&index=4
   https://www.youtube.com/watch?v=jrTMMG0zJyI - music
   http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
-
-
+  https://lh3.googleusercontent.com/proxy/fhUSglT98O3iUKGzC8eaGmUMq7y6aUVXLH6ec1sEtqTsT7_5bwzRCzDr1FF1vzVTPmSywJm2zHgvoLiGgDV1C96hy-dQumjljd1v4_netqejMOFuaBp7yXmRyeKjLq8nxwiG
+  
 */
 
 import ddf.minim.*;
 Minim minim;
 AudioPlayer music;
 
+PImage wind;
+
 Tree[] cherryTree;
 PetalSystem ps;
+float waterLevel = 15;
+float waterHeight = 120;
 
 void setup() {
   size(1200, 900);
@@ -31,31 +35,38 @@ void setup() {
   
   minim = new Minim(this);
   music = minim.loadFile("lofi.mp3");
-  music.play(13000); //plays music from this timeframe 
+  music.play(0); //plays music from this timeframe 
 
   cherryTree = new Tree[1];
   cherryTree[0] = new Tree();
   ps = new PetalSystem(new PVector(random(width), -15));
-  
+  wind = loadImage("wind.png");
+  wind.resize(100,50);
+  noCursor();
 }
 
 void draw() {
+
   growTree();
   
-  if (millis() > 15500) {
-    background(5,50);   
+  if (millis() > 28000) {
+  //if (millis() > 10) { //iso second scene 
+    background(5,50);  
+    noStroke();
+    for (int i = 0; i < waterLevel; i++) {
+      float fade = (1 + sin(frameCount * 0.25 + i)/8)/1.2; //use to determine frequency of color
+      fill(50, 120, 150 + 150 * (waterLevel - i)/waterLevel * fade); //color changing moving effect
+      rect(0, height - waterHeight + i/waterLevel * waterHeight, width, waterHeight/waterLevel); //creates waves in water
+    }    
     ps.addPetals(); 
     ps.run();   
-    noStroke();
-    fill(80,170,255,120);
-    rect(0,height - 80, width,80); //pond
-
+    
   }
   
 }
 
 void growTree() {
-  for (int j = 0; j < .8; j++) { //loop for speed of tree growth
+  for (int j = 0; j < .25; j++) { //loop for speed of tree growth
     for (int i = 0; i < cherryTree.length; i++) {
       PVector pos = cherryTree[i].position;
       PVector prevPos = cherryTree[i].prevPosition;
@@ -127,7 +138,11 @@ class Tree {
   
 }
 
-
+//void keyPressed() {
+//  if (key == 'r') {
+//    setup();
+//  }
+//}
 //temp reset button for testing tree visuals
 //void mousePressed() {
 //  background(5,50);
