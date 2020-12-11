@@ -13,6 +13,8 @@
   http://code.compartmental.net/minim/ Minim sound library by Damien Di Fede and Anderson Mills
   https://lh3.googleusercontent.com/proxy/fhUSglT98O3iUKGzC8eaGmUMq7y6aUVXLH6ec1sEtqTsT7_5bwzRCzDr1FF1vzVTPmSywJm2zHgvoLiGgDV1C96hy-dQumjljd1v4_netqejMOFuaBp7yXmRyeKjLq8nxwiG
   
+  Use LEFT mouse button to create wind in the second scene, move the wind with MOUSE. 
+  
 */
 
 import ddf.minim.*;
