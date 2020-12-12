@@ -31,6 +31,10 @@ float waterHeight = 120;
 void setup() {
   size(1200, 900);
   background(5,50);
+  
+  noStroke();
+  fill(50,150,255);
+  rect(0, height - 15, width, 15); //water in background
   ellipseMode(CENTER);
   stroke(255, 200);
   smooth();
@@ -49,12 +53,14 @@ void setup() {
 
 void draw() {
 
+
   growTree();
   
   if (millis() > 28000) {
   //if (millis() > 10) { //iso second scene 
     background(5,50);  
     noStroke();
+    //water
     for (int i = 0; i < waterLevel; i++) {
       float fade = (1 + sin(frameCount * 0.25 + i)/8)/1.2; //use to determine frequency of color
       fill(50, 120, 150 + 150 * (waterLevel - i)/waterLevel * fade); //color changing moving effect
